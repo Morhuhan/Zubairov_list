@@ -13,7 +13,7 @@ void show_menu() {
 	printf("3. Удалить элемент в начале списка\n");
 	printf("4. Удалить элемент в конце списка\n");
 	printf("5. Просмотреть содержимое очереди\n");
-	printf("0. Выход\n\n");
+	printf("0. Выход\n");
 	printf("Выберите операцию: ");
 }
 
@@ -23,22 +23,24 @@ void view(node** first) {
 
 	int i = 0;
 
-	/*if (is_empty(root) == 1) {
-		printf("List is empty");
-	}*/
+	if (*first != NULL) {
 
-	while (temp->link != NULL) {
+		while (temp->link != NULL) {
 
-		printf("\nELEMENT #%d\n", i);
+			printf("\nELEMENT #%d\n", i);
 
-		printf("info =  %d\n", temp->info);
+			printf("info =  %d\n", temp->info);
 
-		temp = (temp->link);
+			temp = (temp->link);
 
-		i++;
+			i++;
 
+		}
 	}
 
+	else {
+		printf("\nСписок пуст!\n");
+	}
 }
 
 node* create_node(int number) {
@@ -52,8 +54,9 @@ void add_first(node** first, int number) {
 	node* new_node = create_node(number);
 	node* temp;
 
+	new_node->link = NULL;
+
 	if (*first == NULL) {  // Если элемент единственный
-		new_node->link = NULL;
 		*first = new_node;
 	}
 
@@ -62,9 +65,6 @@ void add_first(node** first, int number) {
 		new_node->link = temp;
 		*first = new_node;
 	}
-
-	printf("\nnew node -> link = %d\n", new_node->link);
-
 }
 
 void add_last(node** first, int number) {
@@ -86,10 +86,54 @@ void add_last(node** first, int number) {
 
 		temp->link = new_node;
 	}
-
-	printf("\nnew node -> link = %d\n", new_node->link);
 }
 
+int delete_first(node **first) {
+
+	int number;
+	node* temp;
+
+	if (*first != NULL) {
+		temp = *first;
+		*first = (*first)->link;
+		number = temp->info;
+		free(temp);
+		return number;
+	}
+
+	else {
+		printf("\nСписок пуст!\n");
+		return 0;
+	}
+}
+
+int delete_last(node** first) {
+
+	int number;
+	node* temp1 = *first;
+	node* temp2 = *first;
+
+	if (*first != NULL) {
+
+		while (temp1->link != NULL) {
+			temp1 = temp1->link;
+		}
+
+		while (temp2->link != temp1) {
+			temp2 = temp2->link;
+		}
+
+		temp2->link = NULL;
+		number = temp1->info;
+		free(temp1);
+		return number;
+	}
+
+	else {
+		printf("\nСписок пуст!\n");
+		return 0;
+	}
+}
 
 
 int main() {
@@ -127,11 +171,14 @@ int main() {
 			add_last(&first, number);
 
 			break;
+
 		case 3:
+
+			printf("\nЭлемент: %d удален из списка\n", delete_first(&first));
 
 			break;
 		case 4:
-
+			printf("\nЭлемент: %d удален из списка\n", delete_last(&first));
 			break;
 		case 5:
 			view(&first);
