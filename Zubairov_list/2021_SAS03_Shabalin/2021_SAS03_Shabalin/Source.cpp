@@ -8,13 +8,15 @@ typedef struct node {
 }node;
 
 void show_menu() {
+	printf("\n");
 	printf("1. Добавить в начало списка\n");
 	printf("2. Добавить в конец списка\n");
 	printf("3. Удалить элемент в начале списка\n");
 	printf("4. Удалить элемент в конце списка\n");
-	printf("5. Просмотреть содержимое очереди\n");
+	printf("5. Просмотреть содержимое списка\n");
 	printf("0. Выход\n");
 	printf("Выберите операцию: ");
+	printf("\n");
 }
 
 void view(node** first) {
@@ -25,7 +27,7 @@ void view(node** first) {
 
 	if (*first != NULL) {
 
-		while (temp->link != NULL) {
+		do {
 
 			printf("\nELEMENT #%d\n", i);
 
@@ -34,8 +36,8 @@ void view(node** first) {
 			temp = (temp->link);
 
 			i++;
-
-		}
+		
+		} while (temp->link != NULL);
 	}
 
 	else {
@@ -46,6 +48,7 @@ void view(node** first) {
 node* create_node(int number) {
 	node* new_node = (node*)malloc(1 * sizeof(node));
 	new_node->info = number;
+	new_node->link = NULL;
 	return new_node;
 }
 
@@ -53,8 +56,6 @@ void add_first(node** first, int number) {
 
 	node* new_node = create_node(number);
 	node* temp;
-
-	new_node->link = NULL;
 
 	if (*first == NULL) {  // Если элемент единственный
 		*first = new_node;
@@ -67,7 +68,7 @@ void add_first(node** first, int number) {
 	}
 }
 
-void add_last(node** first, int number) {
+void add_last(node** first, int number) {						// Trouble!
 
 	node* new_node = create_node(number);
 	node* temp = *first;
@@ -107,6 +108,8 @@ int delete_first(node **first) {
 	}
 }
 
+
+
 int delete_last(node** first) {
 
 	int number;
@@ -119,7 +122,7 @@ int delete_last(node** first) {
 			temp1 = temp1->link;
 		}
 
-		while (temp2->link != temp1) {
+		while (temp2->link != temp1) {					// Trouble!
 			temp2 = temp2->link;
 		}
 
@@ -154,6 +157,8 @@ int main() {
 
 		case 1:
 
+			printf("\n");
+
 			printf("Введите целое число для добавления в начало списка: ");
 
 			scanf_s("%d", &number);
@@ -163,6 +168,8 @@ int main() {
 			break;
 
 		case 2:
+
+			printf("\n");
 
 			printf("Введите целое число для добавления в конец списка: ");
 
@@ -184,6 +191,7 @@ int main() {
 			view(&first);
 			break;
 		default:
+			printf("\n");
 			printf("Такой операции не существует.");
 			break;
 		}
