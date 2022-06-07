@@ -1,0 +1,4 @@
+﻿  Source.cpp
+C:\Users\radio\Labs\Zubairov 2 sem labs\Zubairov_list\2021_SAS03_Shabalin\2021_SAS03_Shabalin\Source.cpp(66,9): warning C4477: "printf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "node *"
+C:\Users\radio\Labs\Zubairov 2 sem labs\Zubairov_list\2021_SAS03_Shabalin\2021_SAS03_Shabalin\Source.cpp(90,9): warning C4477: "printf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "node *"
+  2021_SAS03_Shabalin.vcxproj -> C:\Users\radio\Labs\Zubairov 2 sem labs\Zubairov_list\2021_SAS03_Shabalin\Debug\2021_SAS03_Shabalin.exe
